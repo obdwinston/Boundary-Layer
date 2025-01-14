@@ -5,7 +5,7 @@ Basic program to compute airfoil skin friction coefficient using von Karman's in
 ### References
 
 - Boundary Layer - Chapter 7 of _Theoretical and Computational Aerodynamics_ by Moran (1984)
-- Verification (see `docs`) - Page 23 of _Experimental Studies of Flow Separation_ by Seetharam et al. (1977)
+- Verification (see `docs`) - Page 23 of _Experimental Studies of Flow Separation_ by Seetharam et al. (1997)
 - Shortcomings (see `docs`) - Page 87 of _Flight Vehicle Aerodynamics_ by Drela (2013)
 - Panel Method (see `docs`) - Chapter 5 of _Foundations of Aerodynamics_ by Kuethe and Chow (1997)
 
