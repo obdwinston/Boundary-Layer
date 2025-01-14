@@ -33,9 +33,9 @@ utils.plot_cf(theta, H, cf, x, trim)
 ds = theta*H # displacement thickness
 d = theta*(H + H1) # boundary layer thickness
 
-Vn = np.gradient(Vt*ds)
+Vn = np.gradient(Vt*ds) # panel normal velocity
 RHS = panel.constants(alpha, beta, Vn)
 _, cl2, cp2 = panel.solve(An, At, RHS, alpha, beta, S)
 
 print('lift coefficient: %.5f, %.5f' % (cl1, cl2))
-utils.plot_cp(x, y, beta, d, cp1, cp2, trim)
+utils.plot_cp(d, cp1, cp2, x, y, beta, trim)

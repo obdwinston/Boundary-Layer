@@ -12,7 +12,7 @@ def plot_cf(theta, H, cf, x, trim):
     plt.grid()
     plt.show()
 
-def plot_cp(x, y, beta, d, cp1, cp2, trim):
+def plot_cp(d, cp1, cp2, x, y, beta, trim):
 
     _, ax = plt.subplots()
     axx = ax.twinx()
