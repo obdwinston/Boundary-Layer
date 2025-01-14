@@ -6,6 +6,6 @@ References:
 - Panel Method (see `docs`) - Chapter 5 of _Foundations of Aerodynamics_ by Kuethe and Chow (1997)
 - Solution Shortcomings (see `docs`) - Page 87 of _Flight Vehicle Aerodynamics_ by Drela (2013)
 
-![](https://github.com/user-attachments/assets/65e2f6b5-fefa-4be4-ac6b-564b6226bf29)
+![](https://github.com/user-attachments/assets/8f5b3b34-a798-4add-8269-fdc1bef4d440)
 
 ![](https://github.com/user-attachments/assets/93e4f317-1478-46be-8433-6113295298bf)
