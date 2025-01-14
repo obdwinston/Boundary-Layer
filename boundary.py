@@ -18,7 +18,7 @@ def split(Vt, x, y):
     dsl = np.sqrt(dxl**2 + dyl**2)
     sl = np.insert(np.cumsum(dsl), 0, 0)
 
-    return Veu, Vel, su, sl
+    return Veu, Vel, su, sl, istag
 
 def combine(thetau, thetal, Hu, Hl, H1u, H1l, cfu, cfl):
 
@@ -135,4 +135,4 @@ def solve(Ve, s, Re, Htran, trim):
     
     print('surface done')
 
-    return theta, H, H1, cf, cd
+    return theta, H, H1, cf, cd, itran

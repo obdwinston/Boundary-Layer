@@ -18,9 +18,9 @@ An, At = panel.coefficients(X, Y, x, y, S, beta)
 RHS = panel.constants(alpha, beta, 0.)
 Vt, cl1, cp1 = panel.solve(An, At, RHS, alpha, beta, S)
 
-Veu, Vel, su, sl = boundary.split(Vt, x, y)
-thetau, Hu, H1u, cfu, cdu = boundary.solve(Veu, su, Re, Htran, trim)
-thetal, Hl, H1l, cfl, cdl = boundary.solve(Vel, sl, Re, Htran, trim)
+Veu, Vel, su, sl, istag = boundary.split(Vt, x, y)
+thetau, Hu, H1u, cfu, cdu, itranu = boundary.solve(Veu, su, Re, Htran, trim)
+thetal, Hl, H1l, cfl, cdl, itranl = boundary.solve(Vel, sl, Re, Htran, trim)
 theta, H, H1, cf = boundary.combine(thetau, thetal, Hu, Hl, H1u, H1l, cfu, cfl)
 
 cft = np.sum(cf*Vt**2*S) # total skin friction
@@ -33,9 +33,9 @@ utils.plot_cf(theta, H, cf, x, trim)
 ds = theta*H # displacement thickness
 d = theta*(H + H1) # boundary layer thickness
 
-Vn = np.gradient(Vt*ds) # panel normal velocity
+Vn = np.gradient(Vt*ds) # normal velocity
 RHS = panel.constants(alpha, beta, Vn)
 _, cl2, cp2 = panel.solve(An, At, RHS, alpha, beta, S)
 
 print('lift coefficient: %.5f, %.5f' % (cl1, cl2))
-utils.plot_cp(d, cp1, cp2, x, y, beta, trim)
+utils.plot_cp(d, ds, cp1, cp2, istag, itranu, itranl, x, y, beta, trim)
