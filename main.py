@@ -1,0 +1,41 @@
+import panel
+import boundary
+import utils
+import numpy as np
+
+M = .02                     # maximum camber [% chord]
+P = .40                     # maximum camber position [% chord]
+t = .12                     # thickness [% chord]
+n = 128                     # half number of panels
+alpha = np.radians(0.)      # angle of attack [rad]
+Re = 5e6                    # Reynolds number
+Htran = 1.35                # transition shape factor (1.3 to 1.4)
+trim = n//20                # trim turbulent trailing edge
+
+X, Y, x, y, S, beta = panel.airfoil(M, P, t, n)
+An, At = panel.coefficients(X, Y, x, y, S, beta)
+
+RHS = panel.constants(alpha, beta, 0.)
+Vt, cl1, cp1 = panel.solve(An, At, RHS, alpha, beta, S)
+
+Veu, Vel, su, sl = boundary.split(Vt, x, y)
+thetau, Hu, H1u, cfu, cdu = boundary.solve(Veu, su, Re, Htran, trim)
+thetal, Hl, H1l, cfl, cdl = boundary.solve(Vel, sl, Re, Htran, trim)
+theta, H, H1, cf = boundary.combine(thetau, thetal, Hu, Hl, H1u, H1l, cfu, cfl)
+
+cft = np.sum(cf*Vt**2*S) # total skin friction
+cdt = cdu + cdl # total profile drag
+
+print('skin friction coefficient: %.5f (%.1f%%)' % (cft, cft/cdt*100))
+print('profile drag coefficient: %.5f' % cdt)
+utils.plot_cf(theta, H, cf, x, trim)
+
+ds = theta*H # displacement thickness
+d = theta*(H + H1) # boundary layer thickness
+
+Vn = np.gradient(Vt*ds)
+RHS = panel.constants(alpha, beta, Vn)
+_, cl2, cp2 = panel.solve(An, At, RHS, alpha, beta, S)
+
+print('lift coefficient: %.5f, %.5f' % (cl1, cl2))
+utils.plot_cp(x, y, beta, d, cp1, cp2, trim)
