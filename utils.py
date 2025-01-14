@@ -17,11 +17,15 @@ def plot_cp(d, ds, cp1, cp2, istag, itranu, itranl, x, y, beta, trim):
     _, ax = plt.subplots()
     axx = ax.twinx()
 
-    n = len(x)//2
-    ax.plot(x[n:-trim], cp2[n:-trim], label=r'$c_{p2,upper}$', zorder=10)
-    ax.plot(x[trim:n], cp2[trim:n], label=r'$c_{p2,lower}$', zorder=10)
-    ax.plot(x[n:-trim], cp1[n:-trim], label=r'$c_{p1,upper}$')
-    ax.plot(x[trim:n], cp1[trim:n], label=r'$c_{p1,lower}$')
+    # verification
+    data = np.loadtxt("verification.txt", delimiter=",")
+    ax.scatter(data[:, 0], data[:, 1], s=20, label='verification')
+
+    cutoff = 24 # change if required
+    ax.plot(x[cutoff:-cutoff], cp2[cutoff:-cutoff], label='viscid')
+    ax.plot(x[trim:-trim], cp1[trim:-trim], label='inviscid')
+    
+    ax.set_ylim([np.min(cp1) - .3, np.max(cp1) + .3])
     ax.set_xlabel(r'$x$')
     ax.set_ylabel(r'$c_p$')
     ax.legend(loc='upper right')
@@ -39,6 +43,7 @@ def plot_cp(d, ds, cp1, cp2, istag, itranu, itranl, x, y, beta, trim):
     axx.scatter([x[istag + itranu - 1], x[istag - itranl + 1]], \
                 [y[istag + itranu - 1], y[istag - itranl + 1]], \
                 color='red', marker='x', s=20, label='transition', zorder=10)
+    
     axx.set_ylabel(r'$y$')
     axx.legend(loc='lower right')
     axx.set_aspect('equal')

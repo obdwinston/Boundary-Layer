@@ -20,14 +20,17 @@ def split(Vt, x, y):
 
     return Veu, Vel, su, sl, istag
 
-def combine(thetau, thetal, Hu, Hl, H1u, H1l, cfu, cfl):
-
+def combine(Veu, su, thetau, Hu, H1u, cfu,
+            Vel, sl, thetal, Hl, H1l, cfl):
+    
+    Ve = np.concatenate((np.flip(Vel[1:]), Veu))
+    s = np.concatenate((np.flip(sl[1:]), su))
     theta = np.concatenate((np.flip(thetal[1:]), thetau))
     H = np.concatenate((np.flip(Hl[1:]), Hu))
     H1 = np.concatenate((np.flip(H1l[1:]), H1u))
     cf = np.concatenate((np.flip(cfl[1:]), cfu))
 
-    return theta, H, H1, cf
+    return Ve, s, theta, H, H1, cf
 
 def solve(Ve, s, Re, Htran, trim):
 
