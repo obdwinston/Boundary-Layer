@@ -8,7 +8,7 @@ def plot_cf(theta, H, cf, x, trim):
     plt.ylim([0., .01])
     plt.xlabel(r'$x$')
     plt.ylabel(r'$c_f$, $\delta^*$')
-    plt.legend()
+    plt.legend('upper right')
     plt.grid()
     plt.show()
 
@@ -18,7 +18,7 @@ def plot_cp(d, ds, cp1, cp2, istag, itranu, itranl, x, y, beta, trim):
     axx = ax.twinx()
 
     # verification
-    data = np.loadtxt("verification.txt", delimiter=",")
+    data = np.loadtxt('verification.txt', delimiter=',')
     ax.scatter(data[:, 0], data[:, 1], s=20, label='verification')
 
     cutoff = 24 # change if required
