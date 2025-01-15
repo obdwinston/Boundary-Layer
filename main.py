@@ -28,7 +28,7 @@ cft = np.sum(cf*Ve**2*S)        # total skin friction
 cdt = cdu + cdl                 # total profile drag
 ds = theta*H                    # displacement thickness
 d = theta*(H + H1)              # boundary layer thickness
-Vn = np.gradient(Ve*ds, s)      # normal velocity
+Vn = np.gradient(Ve*ds, s)      # entrainment velocity
 
 RHS = panel.constants(alpha, beta, Vn)
 _, cl2, cp2 = panel.solve(An, At, RHS, alpha, beta, S)
