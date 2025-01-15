@@ -17,10 +17,6 @@ def plot_cp(d, ds, cp1, cp2, istag, itranu, itranl, x, y, beta, trim):
     _, ax = plt.subplots()
     axx = ax.twinx()
 
-    # verification
-    # data = np.loadtxt('verification.txt', delimiter=',')
-    # ax.scatter(data[:, 0], data[:, 1], s=20, label='verification')
-
     cutoff = int(4*trim) # change if required
     ax.plot(x[cutoff:-cutoff], cp2[cutoff:-cutoff], label='viscid')
     ax.plot(x[trim:-trim], cp1[trim:-trim], label='inviscid')

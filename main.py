@@ -7,8 +7,8 @@ M = .02                     # maximum camber [% chord]
 P = .40                     # maximum camber position [% chord]
 t = .12                     # thickness [% chord]
 n = 128                     # half number of panels
-alpha = np.radians(0.)      # angle of attack [rad]
-Re = 1e7                    # Reynolds number
+alpha = np.radians(4.3)      # angle of attack [rad]
+Re = 5.7e6                    # Reynolds number
 Htran = 1.4                 # transition shape factor (1.3 to 1.4)
 trim = n//20                # trim turbulent trailing edge
 

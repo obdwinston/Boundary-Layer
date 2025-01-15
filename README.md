@@ -5,17 +5,26 @@ Basic program to compute airfoil skin friction coefficient using von Karman's in
 ### References
 
 - Boundary Layer - Chapter 7 of _Theoretical and Computational Aerodynamics_ by Moran (1984)
-- Verification (see `docs`) - Page 23 of _Experimental Studies of Flow Separation_ by Seetharam et al. (1997)
-- Shortcomings (see `docs`) - Page 87 of _Flight Vehicle Aerodynamics_ by Drela (2013)
 - Panel Method (see `docs`) - Chapter 5 of _Foundations of Aerodynamics_ by Kuethe and Chow (1997)
+- Solution Shortcomings (see `docs`) - Page 87 of _Flight Vehicle Aerodynamics_ by Drela (2013)
+- $c_l/c_d$ Verification (see `docs`) - Page 136 of _Summary of Airfoil Data_ by Abbott et al. (1945)
+- $c_p$ Verification (see `docs`) - Page 23 of _Experimental Studies of Flow Separation_ by Seetharam et al. (1977)
 
 ### Verification
 
-|                       |   Inviscid   |    Viscid    | Seetharam et al. (1997) |
-| :-------------------: | :----------: | :----------: | :---------------------: |
-| $\alpha = 4.3\degree$ | $c_l = 0.77$ | $c_l = 0.60$ |      $c_l = 0.63$       |
+#### $c_l/c_d$ Verification
 
-![](https://github.com/user-attachments/assets/fba38ea4-ca1e-4b29-bc77-9fbe4000caaf)
+|      |     Inviscid      |      Viscid       |   Verification    |
+| :--: | :---------------: | :---------------: | :---------------: |
+| $Re$ | $5.7 \times 10^6$ | $5.7 \times 10^6$ | $5.7 \times 10^6$ |
+
+#### $c_p$ Verification
+
+|          |     Inviscid      |      Viscid       |   Verification    |
+| :------: | :---------------: | :---------------: | :---------------: |
+|   $Re$   | $5.7 \times 10^6$ | $5.7 \times 10^6$ | $2.2 \times 10^6$ |
+| $\alpha$ |    $4.3^\circ$    |    $4.3^\circ$    |    $4.3^\circ$    |
+|  $c_l$   |      $0.77$       |      $0.60$       |      $0.63$       |
 
 ### Theory
 
