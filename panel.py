@@ -80,7 +80,7 @@ def constants(alpha, theta, Vn):
     m = len(theta) # number of control points
     RHS = np.zeros(m + 1)
 
-    RHS[:-1] = np.sin(theta - alpha) - Vn
+    RHS[:-1] = np.sin(theta - alpha) - Vn # entrainment velocity
 
     return RHS
 
