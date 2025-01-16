@@ -26,7 +26,7 @@ Basic program to compute airfoil skin friction coefficient using von Karman's in
 | :------: | :---------------: | :---------------: | :---------------: |
 |   $Re$   | $5.7 \times 10^6$ | $5.7 \times 10^6$ | $2.2 \times 10^6$ |
 | $\alpha$ |    $4.3^\circ$    |    $4.3^\circ$    |    $4.3^\circ$    |
-|  $c_l$   |      $0.77$       |      $0.60$       |      $0.63$       |
+|  $c_l$   |      $0.77$       |      $0.62$       |      $0.63$       |
 
 ![](https://github.com/user-attachments/assets/62da6144-4140-4733-8d64-639497f8d452)
 
