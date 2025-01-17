@@ -18,18 +18,17 @@ def airfoil(M, P, t, n):
     X = np.concatenate((np.flip(xx), xx[1:]))
     Y = np.concatenate((np.flip(yl), yu[1:]))
     
+    return X, Y
+
+def coefficients(X, Y):
+
     x = 0.5*(X[1:] + X[:-1])
     y = 0.5*(Y[1:] + Y[:-1])
 
     dX = X[1:] - X[:-1]
     dY = Y[1:] - Y[:-1]
-
     S = np.sqrt(dX**2 + dY**2)
-    theta = np.arctan2(dY, dX)
-
-    return X, Y, x, y, S, theta
-
-def coefficients(X, Y, x, y, S, theta):
+    beta = np.arctan2(dY, dX)
 
     m = len(x) # number of control points
     An = np.zeros((m + 1, m + 1))
@@ -41,15 +40,15 @@ def coefficients(X, Y, x, y, S, theta):
 
     for i in range(m):
         for j in range(m):
-            A = -(x[i] - X[j])*np.cos(theta[j]) - (y[i] - Y[j])*np.sin(theta[j])
+            A = -(x[i] - X[j])*np.cos(beta[j]) - (y[i] - Y[j])*np.sin(beta[j])
             B = (x[i] - X[j])*(x[i] - X[j]) + (y[i] - Y[j])*(y[i] - Y[j])
-            C = np.sin(theta[i] - theta[j])
-            D = np.cos(theta[i] - theta[j])
-            E = (x[i] - X[j])*np.sin(theta[j]) - (y[i] - Y[j])*np.cos(theta[j])
+            C = np.sin(beta[i] - beta[j])
+            D = np.cos(beta[i] - beta[j])
+            E = (x[i] - X[j])*np.sin(beta[j]) - (y[i] - Y[j])*np.cos(beta[j])
             F = np.log(1 + (S[j]*S[j] + 2*A*S[j])/B)
             G = np.atan2(E*S[j], B + A*S[j])
-            P = (x[i] - X[j])*np.sin(theta[i] - 2*theta[j]) + (y[i] - Y[j])*np.cos(theta[i] - 2*theta[j])
-            Q = (x[i] - X[j])*np.cos(theta[i] - 2*theta[j]) - (y[i] - Y[j])*np.sin(theta[i] - 2*theta[j])
+            P = (x[i] - X[j])*np.sin(beta[i] - 2*beta[j]) + (y[i] - Y[j])*np.cos(beta[i] - 2*beta[j])
+            Q = (x[i] - X[j])*np.cos(beta[i] - 2*beta[j]) - (y[i] - Y[j])*np.sin(beta[i] - 2*beta[j])
 
             Cn2[i, j] = D + 0.5*Q*F/S[j] - (A*C + D*E)*G/S[j]
             Cn1[i, j] = 0.5*D*F + C*G - Cn2[i, j]
@@ -73,22 +72,22 @@ def coefficients(X, Y, x, y, S, theta):
     At[:, 1:-1] = Ct1[:, 1:] + Ct2[:, :-1]
     At[:, -1] = Ct2[:, -1]
 
-    return An, At
+    return An, At, x, y, S, beta
 
-def constants(alpha, theta, Vn):
+def constants(alpha, beta):
 
-    m = len(theta) # number of control points
+    m = len(beta) # number of control points
     RHS = np.zeros(m + 1)
 
-    RHS[:-1] = np.sin(theta - alpha) - Vn # entrainment velocity
+    RHS[:-1] = np.sin(beta - alpha)
 
     return RHS
 
-def solve(An, At, RHS, alpha, theta, S):
+def solve(An, At, RHS, alpha, beta, S):
 
     gamma = np.linalg.solve(An, RHS)
     
-    Vt = np.cos(theta - alpha) + At@gamma
+    Vt = np.cos(beta - alpha) + At@gamma
     cl = 4*np.pi*sum((gamma[1:] + gamma[:-1])/2*S)
     cp = 1 - Vt**2
 
