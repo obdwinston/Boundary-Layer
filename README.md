@@ -32,4 +32,4 @@ Basic program to compute airfoil skin friction coefficient using von Karman's in
 
 ### Theory
 
-![](https://github.com/user-attachments/assets/498f6ca1-d76f-4959-8a7c-4cd138c38b63)
+![](https://github.com/user-attachments/assets/e6d7b1cf-db6e-4d4f-a5af-a856ad0093e9)
