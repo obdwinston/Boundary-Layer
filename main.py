@@ -42,7 +42,7 @@ _, cl2, cp2 = panel.solve(An, At, RHS, alpha, beta2, S2)
 
 print('skin friction coefficient: %.5f (%.1f%%)' % (cft, cft/cdt*100))
 print('profile drag coefficient: %.5f' % cdt)
-print('lift coefficient: %.5f, %.5f' % (cl1, cl2/(np.max(x2) - np.min(x2))))
+print('lift coefficient: %.5f, %.5f' % (cl1, cl2))
 
 utils.plot_cf(theta, H, cf, s, trim)
 utils.plot_cp(x1, y1, beta1, x2, y2, beta2, cp1, cp2,
